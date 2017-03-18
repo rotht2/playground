@@ -1,6 +1,9 @@
+package game.pieces
+
 class Die {
 
-    Die(){
-
+    def faces
+    Die(faces){
+        this.faces = faces
     }
 }
