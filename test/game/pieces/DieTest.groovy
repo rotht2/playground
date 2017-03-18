@@ -21,4 +21,13 @@ class DieTest{
         assert d10.faces == 10
         assert d12.faces == 12
     }
+
+    @Test
+    void should_roll_die(){
+        def die = new Die(6)
+        def possibleResults = [1,2,3,4,5,6]
+        (1..100).each(){
+            assert possibleResults.contains(die.roll())
+        }
+    }
 }
