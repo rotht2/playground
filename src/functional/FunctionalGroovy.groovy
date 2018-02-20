@@ -10,7 +10,7 @@ class FunctionalGroovy {
      */
     // Filter = findAll
     // map = collect
-    // fold = inject
+    // fold/reduce = inject
 
     def square = { number -> number * number}
 
@@ -55,5 +55,17 @@ class FunctionalGroovy {
 
     static List collectWhatItDos(List<Shortcut> list) {
         list.collect( { it.whatItDoes } )
+    }
+
+    def calculateAvgIterativelyishWithNewGrade(List<Integer> listOfGrades, int gradeToInject) {
+
+    }
+
+    def calculateAvgWithInjectWithNewGrade(List<Integer> listOfGrades, int gradeToInject) {
+
+    }
+
+    def calculateAvgIterativelyWithNewGrade(List<Integer> listOfGrades, int gradeToInject) {
+
     }
 }

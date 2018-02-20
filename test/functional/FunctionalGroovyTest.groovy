@@ -110,6 +110,17 @@ class FunctionalGroovyTest {
     }
 
     @Test
+    void injectSomething(){
+        def listOfGrades = [ 90, 80, 100, 75, 89, 95]
+        def iterativelyish = functionalGroovy.calculateAvgIterativelyishWithNewGrade(listOfGrades, 85)
+        def injectivly = functionalGroovy.calculateAvgWithInjectWithNewGrade(listOfGrades, 85)
+        def iteratively = functionalGroovy.calculateAvgIterativelyWithNewGrade(listOfGrades, 85)
+        assert iterativelyish == injectivly
+        assert iterativelyish == iteratively
+        assert injectivly == iteratively
+    }
+
+    @Test
     void metaClass(){
         List.metaClass.map = { cls ->
             delegate.collect(cls)
