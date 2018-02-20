@@ -20,30 +20,40 @@ class FunctionalGroovy {
 
     def addWithTypes = {int x, int y -> x + y}
 
-    def sortByNumberOfKeys(List<Shortcut> shortcutList){
-        // This sorts a collection of things returned by it.keys.size. In our example this is the number of keys in the shortcut
-        println(shortcutList.collect{ it.keys.size() }.sort())
-
-        // This sorts the actual shortcut objects by the number of keys in the short cut.
-        println(shortcutList.sort({ it.keys.size() }))
+    static List<Shortcut> sortByNumberOfKeys(List<Shortcut> shortcutList){
+        shortcutList.sort({ it.keys.size() })
     }
 
-    List<Shortcut> findShortCutContainingKey(List<Shortcut> shortcutList, String key) {
+    static List<Shortcut> findShortCutContainingKey(List<Shortcut> shortcutList, String key) {
         shortcutList.findAll({ it.keys.contains(key)})
     }
 
-    //TODO inject
-    void injectShortCut(Shortcut shortcut){
-
-    }
-
     // TODO pass closure to method
-    void methodWithClosureParam(Closure closure){
-        closure()
+    static List methodWithClosureParam(Closure closure, List shortCuts){
+        closure(shortCuts)
     }
 
-    // TODO call the meta classed methods ( with the common functional names )
-    void sameExamplesAsAboveWithConventionalFuntionalNames(List<Shortcut> shortcuts){
+    static def calculateAvgIterativelyish(List<Integer> listOfGrades) {
+        def sum = 0
+        listOfGrades.each { grade ->
+            sum += grade
+        }
+        return sum/listOfGrades.size()
+    }
 
+    static def calculateAvgWithInject(List<Integer> listOfGrades) {
+        listOfGrades.inject {acc, val -> acc + val } / listOfGrades.size()
+    }
+
+    static def calculateAvgIteratively(List<Integer> listOfGrades){
+        def sum = 0
+        for(Integer grade : listOfGrades){
+            sum += grade
+        }
+        return sum/listOfGrades.size()
+    }
+
+    static List collectWhatItDos(List<Shortcut> list) {
+        list.collect( { it.whatItDoes } )
     }
 }

@@ -3,7 +3,7 @@ package functional
 class Shortcut {
 
     def keys = new ArrayList()
-    private whatItDoes
+    def whatItDoes
 
     Shortcut(String whatItDoes, String... s){
         this.whatItDoes = whatItDoes
