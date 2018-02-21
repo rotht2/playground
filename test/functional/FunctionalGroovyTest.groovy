@@ -7,11 +7,9 @@ import org.junit.Test
 class FunctionalGroovyTest {
 
     List shortCuts
-    FunctionalGroovy functionalGroovy
 
     @Before
     void setup(){
-        functionalGroovy = new FunctionalGroovy()
         shortCuts = new ArrayList()
         shortCuts.add(new Shortcut('convert Java file to Kotlin','control', 'shift', 'alt', 'k'))
         shortCuts.add(new Shortcut('copy','control', 'c'))
@@ -23,26 +21,26 @@ class FunctionalGroovyTest {
 
     @Test
     void squaresTwoNumbers(){
-        assert functionalGroovy.square(4) == 16
-        assert functionalGroovy.squareIt(4) == 16
+        assert FunctionalGroovy.square(4) == 16
+        assert FunctionalGroovy.squareIt(4) == 16
     }
 
     @Ignore("Fails because there is no * operator for string")
     @Test
     void takesTheSquareRootOfTwoNonNumbers(){
-        assert functionalGroovy.square("A") == 16
-        assert functionalGroovy.squareIt("a") == 16
+        assert FunctionalGroovy.square("A") == 16
+        assert FunctionalGroovy.squareIt("a") == 16
     }
 
     @Test
     void addsStuff(){
-        assert functionalGroovy.add(1,2) == 3
-        assert functionalGroovy.add("x", "y") == "xy"
+        assert FunctionalGroovy.add(1,2) == 3
+        assert FunctionalGroovy.add("x", "y") == "xy"
     }
 
     @Test
     void addWithTypes(){
-        assert functionalGroovy.addWithTypes(1,2) == 3
+        assert FunctionalGroovy.addWithTypes(1,2) == 3
         // Uncomment to see the types not match up.. Because I provided types in the lambda declaration
 //        assert functionalGroovy.addWithTypes("x", "y") == "xy"
     }
@@ -54,7 +52,7 @@ class FunctionalGroovyTest {
             whatItDos.add(shortcut.whatItDoes)
         }
 
-        assert whatItDos == functionalGroovy.collectWhatItDos(shortCuts)
+        assert whatItDos == FunctionalGroovy.collectWhatItDos(shortCuts)
     }
 
     @Test
@@ -69,7 +67,7 @@ class FunctionalGroovyTest {
         listToBeSorted.add(shortcutRightClick)
         listToBeSorted.add(shortcutSettings)
 
-        functionalGroovy.sortByNumberOfKeys(listToBeSorted)
+        FunctionalGroovy.sortByNumberOfKeys(listToBeSorted)
         assert listToBeSorted.size() == 4
         assert listToBeSorted.indexOf(shortcutRightClick) == 0
         assert listToBeSorted.indexOf(shortcutCut) == 1
@@ -92,7 +90,7 @@ class FunctionalGroovyTest {
         listToFindThings.add(shortcutRightClick)
         listToFindThings.add(shortcutSettings)
 
-        List<Shortcut> foundAllShortcuts = functionalGroovy.findShortCutContainingKey(shortCuts, "x")
+        List<Shortcut> foundAllShortcuts = FunctionalGroovy.findShortCutContainingKey(shortCuts, "x")
         assert foundAllShortcuts.size() == 1
         assert foundAllShortcuts.get(0).properties == shortcutCut.properties
 //        println(shortcutCut.properties)
@@ -101,9 +99,9 @@ class FunctionalGroovyTest {
     @Test
     void inject(){
         def listOfGrades = [ 90, 80, 100, 75, 89, 95]
-        def iterativelyish = functionalGroovy.calculateAvgIterativelyish(listOfGrades)
-        def injectivly = functionalGroovy.calculateAvgWithInject(listOfGrades)
-        def iteratively = functionalGroovy.calculateAvgIteratively(listOfGrades)
+        def iterativelyish = FunctionalGroovy.calculateAvgIterativelyish(listOfGrades)
+        def injectivly = FunctionalGroovy.calculateAvgWithInject(listOfGrades)
+        def iteratively = FunctionalGroovy.calculateAvgIteratively(listOfGrades)
         assert iterativelyish == injectivly
         assert iterativelyish == iteratively
         assert injectivly == iteratively
@@ -111,10 +109,12 @@ class FunctionalGroovyTest {
 
     @Test
     void injectSomething(){
-        def listOfGrades = [ 90, 80, 100, 75, 89, 95]
-        def iterativelyish = functionalGroovy.calculateAvgIterativelyishWithNewGrade(listOfGrades, 85)
-        def injectivly = functionalGroovy.calculateAvgWithInjectWithNewGrade(listOfGrades, 85)
-        def iteratively = functionalGroovy.calculateAvgIterativelyWithNewGrade(listOfGrades, 85)
+        def listOfGradesIterativelyish = [ 90, 80, 100, 75, 89, 95]
+        def listOfGradesInject = [ 90, 80, 100, 75, 89, 95]
+        def listOfGradesIterative = [ 90, 80, 100, 75, 89, 95]
+        def iterativelyish = FunctionalGroovy.calculateAvgIterativelyishWithNewGrade(listOfGradesIterativelyish, 85)
+        def injectivly = FunctionalGroovy.calculateAvgWithInjectWithNewGrade(listOfGradesInject, 85)
+        def iteratively = FunctionalGroovy.calculateAvgIterativelyWithNewGrade(listOfGradesIterative, 85)
         assert iterativelyish == injectivly
         assert iterativelyish == iteratively
         assert injectivly == iteratively
@@ -130,8 +130,8 @@ class FunctionalGroovyTest {
         }
 
         assert shortCuts.filter( {it.keys.contains('control')}).size() > 0
-        assert shortCuts.filter({ it.keys.contains('control') }) == functionalGroovy.findShortCutContainingKey(shortCuts, 'control')
-        assert shortCuts.map( { it.whatItDoes }) == functionalGroovy.collectWhatItDos(shortCuts)
+        assert shortCuts.filter({ it.keys.contains('control') }) == FunctionalGroovy.findShortCutContainingKey(shortCuts, 'control')
+        assert shortCuts.map( { it.whatItDoes }) == FunctionalGroovy.collectWhatItDos(shortCuts)
     }
 
     @Test
@@ -143,6 +143,6 @@ class FunctionalGroovyTest {
             }
             firstKeys
         }
-        assert closure(shortCuts) == functionalGroovy.methodWithClosureParam(closure, shortCuts)
+        assert closure(shortCuts) == FunctionalGroovy.methodWithClosureParam(closure, shortCuts)
     }
 }

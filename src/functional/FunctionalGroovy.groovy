@@ -2,23 +2,17 @@ package functional
 
 class FunctionalGroovy {
 
-    // TODO Metaclass out findAll, collect, and inject to rename them to Fiter map fold
-    /*
-        filter :
-        map :
-        fold :
-     */
     // Filter = findAll
     // map = collect
     // fold/reduce = inject
 
-    def square = { number -> number * number}
+    static def square = { number -> number * number}
 
-    def squareIt = {it * it}
+    static def squareIt = {it * it}
 
-    def add = {x, y -> x + y}
+    static def add = {x, y -> x + y}
 
-    def addWithTypes = {int x, int y -> x + y}
+    static def addWithTypes = {int x, int y -> x + y}
 
     static List<Shortcut> sortByNumberOfKeys(List<Shortcut> shortcutList){
         shortcutList.sort({ it.keys.size() })
@@ -28,7 +22,6 @@ class FunctionalGroovy {
         shortcutList.findAll({ it.keys.contains(key)})
     }
 
-    // TODO pass closure to method
     static List methodWithClosureParam(Closure closure, List shortCuts){
         closure(shortCuts)
     }
@@ -57,15 +50,25 @@ class FunctionalGroovy {
         list.collect( { it.whatItDoes } )
     }
 
-    def calculateAvgIterativelyishWithNewGrade(List<Integer> listOfGrades, int gradeToInject) {
-
+    static def calculateAvgIterativelyishWithNewGrade(List<Integer> listOfGrades, int gradeToInject) {
+        def sum = 0
+        listOfGrades.add(gradeToInject)
+        listOfGrades.each { grade ->
+            sum += grade
+        }
+        return sum/listOfGrades.size()
     }
 
-    def calculateAvgWithInjectWithNewGrade(List<Integer> listOfGrades, int gradeToInject) {
-
+    static def calculateAvgWithInjectWithNewGrade(List<Integer> listOfGrades, int gradeToInject) {
+        listOfGrades.inject(gradeToInject){acc, val -> acc + val } / (listOfGrades.size() + 1)
     }
 
-    def calculateAvgIterativelyWithNewGrade(List<Integer> listOfGrades, int gradeToInject) {
-
+    static def calculateAvgIterativelyWithNewGrade(List<Integer> listOfGrades, int gradeToInject) {
+        def sum = 0
+        listOfGrades.add(gradeToInject)
+        for(Integer grade : listOfGrades){
+            sum += grade
+        }
+        return sum/listOfGrades.size()
     }
 }
